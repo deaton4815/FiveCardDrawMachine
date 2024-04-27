@@ -36,6 +36,9 @@
     <ClInclude Include="Hand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GUIInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fiveCardApp.cpp">
@@ -57,6 +60,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

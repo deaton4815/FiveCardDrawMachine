@@ -1,9 +1,11 @@
 #pragma once
 
 #include "wx/wx.h"
+#include "wx/imagpng.h"
 #include <vector>
 #include <string>
-#include "wx/imagpng.h"
+
+#include "GUIInterface.h"
 
 class fiveCardMain : public wxFrame
 {
@@ -14,6 +16,9 @@ public:
 	void OnNewGame(wxCommandEvent&);
 
 private:
+
+	GUIInterface m_dealerInterface;
+
 	std::vector<wxStaticBitmap*> cardBitmaps;  // Holds pointers to the card images
 
 	std::vector<std::string> getCardImages();
