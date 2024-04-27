@@ -23,7 +23,7 @@ fiveCardMain::~fiveCardMain() = default;
 
 // Event handler for the button click
 void fiveCardMain::OnNewGame(wxCommandEvent& event) {
-    std::vector<std::string> cardImages = GetCardImages();  // Get card images from an external function
+    std::vector<std::string> cardImages = getCardImages();  // Get card images from an external function
     wxBoxSizer* sizer = dynamic_cast<wxBoxSizer*>(this->GetSizer());
 
     // Clear previous images if any
@@ -32,6 +32,10 @@ void fiveCardMain::OnNewGame(wxCommandEvent& event) {
     }
     cardBitmaps.clear();
 
+    // Define the size of the card images
+    const int cardWidth = 100; // Example width
+    const int cardHeight = 150; // Example height
+
     // Load new images and display them
     for (const std::string& imagePath : cardImages) {
         wxImage image(wxString(imagePath), wxBITMAP_TYPE_PNG);
@@ -39,9 +43,25 @@ void fiveCardMain::OnNewGame(wxCommandEvent& event) {
             wxLogError("Failed to load image from path: %s", imagePath);
             continue;
         }
+
+        // Resize the image to the specified dimensions
+        image.Rescale(cardWidth, cardHeight);
+
         wxStaticBitmap* bitmap = new wxStaticBitmap(this, wxID_ANY, wxBitmap(image));
         cardBitmaps.push_back(bitmap);
         sizer->Add(bitmap, 0, wxALL, 5);
     }
     this->Layout();  // Update layout
+}
+
+// Dummy function that simulates getting image paths
+vector<string> fiveCardMain::getCardImages() {
+    return {
+
+        "card_images/2_of_clubs.png",
+        "card_images/3_of_clubs.png",
+        "card_images/4_of_clubs.png",
+        "card_images/5_of_clubs.png",
+        "card_images/6_of_clubs.png"
+    };
 }

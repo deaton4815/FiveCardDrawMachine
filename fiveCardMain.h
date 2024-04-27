@@ -15,4 +15,6 @@ public:
 
 private:
 	std::vector<wxStaticBitmap*> cardBitmaps;  // Holds pointers to the card images
+
+	std::vector<std::string> getCardImages();
 };
