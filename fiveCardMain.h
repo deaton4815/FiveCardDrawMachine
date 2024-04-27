@@ -1,14 +1,18 @@
 #pragma once
 
 #include "wx/wx.h"
+#include <vector>
+#include <string>
+#include "wx/imagpng.h"
 
 class fiveCardMain : public wxFrame
 {
 public:
-	fiveCardMain();
+	fiveCardMain(const wxString&, const wxPoint&, const wxSize&);
 	~fiveCardMain();
 
-	wxButton* m_btn1 = nullptr;
-	wxTextCtrl* m_text1 = nullptr;
-	wxListBox* m_list1 = nullptr;
+	void OnNewGame(wxCommandEvent&);
+
+private:
+	std::vector<wxStaticBitmap*> cardBitmaps;  // Holds pointers to the card images
 };
