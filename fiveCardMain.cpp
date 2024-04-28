@@ -16,7 +16,7 @@ fiveCardMain::fiveCardMain(const wxString& title, const wxPoint& pos, const wxSi
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
     // New Game button
-    wxButton* newGameBtn = new wxButton(this, wxID_ANY, wxT("New Game"), wxDefaultPosition, wxDefaultSize);
+    newGameBtn = new wxButton(this, wxID_ANY, wxT("New Game"), wxDefaultPosition, wxDefaultSize);
     newGameBtn->Bind(wxEVT_BUTTON, &fiveCardMain::OnNewGame, this);
     mainSizer->Add(newGameBtn, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
 
@@ -44,8 +44,13 @@ fiveCardMain::fiveCardMain(const wxString& title, const wxPoint& pos, const wxSi
     this->Layout();
 }
 
+void fiveCardMain::initializeButtons() {
+
+}
+
     void fiveCardMain::OnNewGame(wxCommandEvent& event) {
 
+        newGameBtn->Hide();
         m_dealerInterface.newGame();
 
         // Clear previous images and selections if any
