@@ -26,6 +26,7 @@ private:
 
 	wxComboBox* m_placeBetBox;
 	wxButton* m_dealCardsButton{ new wxButton(this, wxID_ANY, wxT("Deal Cards"), wxDefaultPosition, wxDefaultSize) };
+	wxButton* m_insertCoinButon{ new wxButton(this, wxID_ANY, wxT("Insert Coin"), wxDefaultPosition, wxDefaultSize) };
 
 	std::vector<wxStaticBitmap*> m_cardBitmaps;  // Holds pointers to the card images
 	std::vector<bool> m_cardSelections;  // Tracks selection state of each card
@@ -40,6 +41,7 @@ private:
 	void initializeCardSelection();
 
 	void onNewHand(wxCommandEvent&);
+	void onInsertCoin(wxCommandEvent&);
 	void onToggleCard(wxMouseEvent&);
 	void onSubmitKeepers(wxCommandEvent&);
 

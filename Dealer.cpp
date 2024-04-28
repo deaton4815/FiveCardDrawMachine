@@ -3,6 +3,7 @@
 using namespace std;
 
 bool Dealer::setWager(unsigned wager) { return m_payService.wagerFunds(wager); }
+void Dealer::addFunds(unsigned amount) { m_payService.addFunds(amount); }
 
 void Dealer::newHand() {
 	m_deck.shuffleDeck();

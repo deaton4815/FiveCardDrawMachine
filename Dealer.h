@@ -11,6 +11,8 @@ class Dealer
 public:
 
 	bool setWager(unsigned);
+	void addFunds(unsigned);
+
 	void newHand();
 	void executeKeeperSelection(std::vector<unsigned>);
 	

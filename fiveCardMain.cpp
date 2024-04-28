@@ -55,6 +55,11 @@ void fiveCardMain::initializeBettingDisplay() {
     // Deal cards button
     m_dealCardsButton->Bind(wxEVT_BUTTON, &fiveCardMain::onNewHand, this);
     m_bettingSizer->Add(m_dealCardsButton, 0, wxALL, 5);
+
+    //Insert Coin button
+    m_insertCoinButon->Bind(wxEVT_BUTTON, &fiveCardMain::onInsertCoin, this);
+    m_bettingSizer->Add(m_insertCoinButon, 0, wxALL, 5);
+
 }
 
 // Card selection
@@ -89,6 +94,14 @@ void fiveCardMain::initializeCardSelection() {
         m_selectedCardsText->Show();  // Show the selected cards text only after cards are loaded
         m_submitKeepersButton->Show();
         this->Layout();  // Update layout
+    }
+
+    void fiveCardMain::onInsertCoin(wxCommandEvent& event) {
+
+        // Add coin to funds
+        m_dealer.addFunds(1);
+        updateFundsDisplay();
+        this->Layout();
     }
 
     void fiveCardMain::onToggleCard(wxMouseEvent& event) {

@@ -13,6 +13,7 @@ public:
 	void executeKeeperSelection(std::vector<bool>);
 
 	bool setWagerAmount(unsigned);
+	void addFunds(unsigned);
 	unsigned getWager() const;
 	unsigned getFunds() const;
 
