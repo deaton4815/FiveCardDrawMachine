@@ -7,6 +7,7 @@ public:
 	void addFunds();
 	void addFunds(unsigned);
 	bool wagerFunds(unsigned);
+	unsigned cashOut();
 
 	unsigned getFunds() const;
 
