@@ -7,11 +7,13 @@ bool PayService::wagerFunds(unsigned wager) {
 	bool placed{ false };
 	if (wager < m_funds) {
 		m_funds -= wager;
+		m_wager = wager;
 		placed = true;
 	}
 	return placed;
 }
 
+void PayService::resetWager() { m_wager = 0; }
 unsigned PayService::cashOut() {
 	unsigned cashVoucher{ m_funds };
 	m_funds = 0;
@@ -19,3 +21,4 @@ unsigned PayService::cashOut() {
 }
 
 unsigned PayService::getFunds() const { return m_funds; }
+unsigned PayService::getWager() const { return m_wager; }

@@ -4,6 +4,7 @@
 #include "CardDeck.h"
 #include "Card.h"
 #include "Hand.h"
+#include "PayService.h"
 
 class Dealer
 {
@@ -20,6 +21,7 @@ private:
 
 	CardDeck m_deck;
 	Hand m_hand;
+	PayService m_payService;
 
 	bool m_firstHand{ true };
 
