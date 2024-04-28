@@ -43,6 +43,7 @@ private:
 
 	void onNewHand(wxCommandEvent&);
 	void onInsertCoin(wxCommandEvent&);
+	void onCashOut(wxCommandEvent&);
 	void onToggleCard(wxMouseEvent&);
 	void onSubmitKeepers(wxCommandEvent&);
 

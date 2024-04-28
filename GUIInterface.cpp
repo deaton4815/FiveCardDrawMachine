@@ -38,6 +38,7 @@ void GUIInterface::executeKeeperSelection(vector<bool> selections) {
 
 bool GUIInterface::setWagerAmount(unsigned wager) {return m_dealer.setWager(wager); }
 void GUIInterface::addFunds(unsigned deposit) { m_dealer.addFunds(deposit); }
+unsigned GUIInterface::cashOut() { return m_dealer.cashOut(); }
 unsigned GUIInterface::getWager() const { return m_dealer.getWagerAmount(); }
 unsigned GUIInterface::getFunds() const { return m_dealer.getFunds(); }
 

@@ -14,6 +14,8 @@ public:
 
 	bool setWagerAmount(unsigned);
 	void addFunds(unsigned);
+	unsigned cashOut();
+
 	unsigned getWager() const;
 	unsigned getFunds() const;
 

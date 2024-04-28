@@ -107,6 +107,13 @@ void fiveCardMain::initializeCardSelection() {
         this->Layout();
     }
 
+    void fiveCardMain::onCashOut(wxCommandEvent& event) {
+        unsigned cashVoucher{ m_dealer.cashOut() };
+        wxMessageBox(wxString::Format("Printing cash voucher for %u coins", cashVoucher));
+        updateFundsDisplay();
+        this->Layout();
+    }
+
     void fiveCardMain::onToggleCard(wxMouseEvent& event) {
         wxStaticBitmap* clickedBitmap = dynamic_cast<wxStaticBitmap*>(event.GetEventObject());
         size_t index = std::distance(m_cardBitmaps.begin(), std::find(m_cardBitmaps.begin(), m_cardBitmaps.end(), clickedBitmap));
