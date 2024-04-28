@@ -5,6 +5,6 @@ class Flush : public PokerHand
 {
 
 public:
-	bool isMatch(std::vector<Card>);
+	bool isMatch(std::vector<Card>) const;
 };
 

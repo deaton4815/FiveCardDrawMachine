@@ -2,7 +2,7 @@
 
 using namespace std;
 
-bool Flush::isMatch(vector<Card> hand) {
+bool Flush::isMatch(vector<Card> hand) const {
 	bool suited{ true };
 	auto card{ cbegin(hand) };
 
