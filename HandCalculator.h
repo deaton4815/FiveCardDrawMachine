@@ -19,12 +19,17 @@
 class HandCalculator
 {
 public:
+
+	HandCalculator();
+	~HandCalculator();
+
 	void calculateHand(std::vector<Card>);
 
 	unsigned getMultiplier();
 	std::string getHandName();
 
 private:
+	/*
 	RoyalFlush m_royalFlush;
 	StraightFlush m_straightFlush;
 	FourOfAKind m_fourOfAKind;
@@ -34,6 +39,9 @@ private:
 	ThreeOfAKind m_threeOfAKind;
 	TwoPair m_twoPair;
 	JacksOrBetter m_jacksOrBetter;
+	*/
+
+	array<PokerHand*, 9> m_pokerHands;
 
 	unsigned m_multiplier{ 0 };
 	std::string m_name{ "" };

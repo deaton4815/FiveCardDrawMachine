@@ -2,20 +2,36 @@
 
 using namespace std;
 
+HandCalculator::HandCalculator() {
+	m_pokerHands[0] = new RoyalFlush;
+	m_pokerHands[1] = new StraightFlush;
+	m_pokerHands[2] = new FourOfAKind;
+	m_pokerHands[3] = new FullHouse;
+	m_pokerHands[4] = new Flush;
+	m_pokerHands[5] = new Straight;
+	m_pokerHands[6] = new ThreeOfAKind;
+	m_pokerHands[7] = new TwoPair;
+	m_pokerHands[8] = new JacksOrBetter;
+}
+
+HandCalculator::~HandCalculator() {
+	delete m_pokerHands;
+}
+
 void HandCalculator::calculateHand(vector<Card> hand) {
 
-	array<PokerHand*, 9> pokerHands;
-	pokerHands[0] = new RoyalFlush;
-	pokerHands[1] = new StraightFlush;
-	pokerHands[2] = new FourOfAKind;
-	pokerHands[3] = new FullHouse;
-	pokerHands[4] = new Flush;
-	pokerHands[5] = new Straight;
-	pokerHands[6] = new ThreeOfAKind;
-	pokerHands[7] = new TwoPair;
-	pokerHands[8] = new JacksOrBetter;
+	bool match{ false };
+	for (size_t i{ 0 }; i < m_pokerHands.size(); ++i) {
+		if (m_pokerHands[i]->isMatch(hand)) {
+			m_multiplier = m_pokerHands[i]->getMultiplier();
+			m_name = m_pokerHands[i]->getName();
 
-	for (size_t i{ 0 }; i < pokerHands.size(); ++i) {
-
+			match = true;
+			break;
+		}
+	}
+	if (!match) {
+		m_multiplier = 0;
+		m_name = "Losing Hand";
 	}
 }
