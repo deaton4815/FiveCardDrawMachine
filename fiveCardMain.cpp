@@ -15,6 +15,20 @@ fiveCardMain::fiveCardMain(const wxString& title, const wxPoint& pos, const wxSi
     // Main layout sizer
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
+    // Top display sizer for Wager and Funds
+    wxBoxSizer* topDisplaySizer = new wxBoxSizer(wxHORIZONTAL);
+    mainSizer->Add(topDisplaySizer, 0, wxEXPAND | wxALL, 5);
+
+    // Wager display
+    wagerDisplay = new wxStaticText(this, wxID_ANY, "Wager: ", wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT);
+    topDisplaySizer->Add(wagerDisplay, 1, wxEXPAND | wxALL, 5);
+    updateWagerDisplay();  // Function to set text from external function
+
+    // Funds display
+    fundsDisplay = new wxStaticText(this, wxID_ANY, "Funds: ", wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT);
+    topDisplaySizer->Add(fundsDisplay, 1, wxEXPAND | wxALL, 5);
+    updateFundsDisplay();  // Function to set text from external function
+
     // Sizer for the cards
     cardSizer = new wxBoxSizer(wxHORIZONTAL);
     mainSizer->Add(cardSizer, 0, wxALIGN_CENTER | wxALL, 5);
@@ -39,7 +53,7 @@ fiveCardMain::fiveCardMain(const wxString& title, const wxPoint& pos, const wxSi
     initializeSelectedCardsText(mainSizer);
 
     // Submit keepers button
-    intializeSubmitKeepersButton(mainSizer); 
+    initializeSubmitKeepersButton(mainSizer); 
 
     this->SetSizer(mainSizer);
     this->Layout();
@@ -69,7 +83,7 @@ void fiveCardMain::initializeSelectedCardsText(wxBoxSizer* sizer) {
 }
 
 // Submit Keepers button, initially hidden
-void fiveCardMain::intializeSubmitKeepersButton(wxBoxSizer* sizer) {
+void fiveCardMain::initializeSubmitKeepersButton(wxBoxSizer* sizer) {
     submitKeepersBtn = new wxButton(this, wxID_ANY, wxT("Submit Keepers"), wxDefaultPosition, wxDefaultSize);
     submitKeepersBtn->Bind(wxEVT_BUTTON, &fiveCardMain::OnSubmitKeepers, this);
     submitKeepersBtn->Hide();  // Initially hide the button
@@ -144,6 +158,10 @@ void fiveCardMain::intializeSubmitKeepersButton(wxBoxSizer* sizer) {
 
         // Load new images, resize them, and display them
         std::vector<std::string> cardImages = getCardImages();
+        if (cardImages.empty()) {
+            wxLogError("No card images available to display.");
+            return;
+        }
         for (const std::string& imagePath : cardImages) {
             wxImage image(wxString(imagePath), wxBITMAP_TYPE_PNG);
             if (!image.IsOk()) {
@@ -158,6 +176,16 @@ void fiveCardMain::intializeSubmitKeepersButton(wxBoxSizer* sizer) {
             cardSelections.push_back(false);
             cardSizer->Add(bitmap, 0, wxALL, 5);
         }
+    }
+
+    void fiveCardMain::updateWagerDisplay() {
+        unsigned wager = m_dealerInterface.getWager();  // Assuming this is how you get the wager
+        wagerDisplay->SetLabel(wxString::Format("Wager: %u", wager));
+    }
+
+    void fiveCardMain::updateFundsDisplay() {
+        unsigned funds = m_dealerInterface.getFunds();  // Assuming this is how you get the funds
+        fundsDisplay->SetLabel(wxString::Format("Funds: %u", funds));
     }
 
     vector<string> fiveCardMain::getCardImages() {

@@ -23,18 +23,23 @@ private:
 	wxButton* submitKeepersBtn;
 	wxStaticText* selectionPrompt; // Prompt for selecting cards
 	wxComboBox* placeBetBox;
+	wxStaticText* wagerDisplay;
+	wxStaticText* fundsDisplay;
 
 	//void initializeNewGameButton(wxBoxSizer*);
 	void initializePlaceBetBox(wxBoxSizer*);
 	void initializeCardSelectionPrompt(wxBoxSizer*);
 	void initializeSelectedCardsText(wxBoxSizer*);
-	void intializeSubmitKeepersButton(wxBoxSizer*);
+	void initializeSubmitKeepersButton(wxBoxSizer*);
 
 	void OnNewGame(wxCommandEvent&);
 	void OnToggleCard(wxMouseEvent&);
 	void OnSubmitKeepers(wxCommandEvent&);
 
 	void displayCards();
+
+	void updateWagerDisplay();
+	void updateFundsDisplay();
 
 	void UpdateSelectedCardsDisplay();
 	std::vector<std::string> getCardImages();

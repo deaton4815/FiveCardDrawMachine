@@ -12,6 +12,9 @@ public:
 	void newGame();
 	void executeKeeperSelection(std::vector<bool>);
 
+	unsigned getWager() const;
+	unsigned getFunds() const;
+
 	std::vector<std::string> getHandImageFileNames();
 
 private:

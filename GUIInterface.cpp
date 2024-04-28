@@ -36,6 +36,16 @@ void GUIInterface::executeKeeperSelection(vector<bool> selections) {
 	m_dealer.executeKeeperSelection(keepers);
 }
 
+unsigned GUIInterface::getWager() const {
+	unsigned temp{ 0 };
+	return temp;
+}
+
+unsigned GUIInterface::getFunds() const {
+	unsigned temp{ 0 };
+	return temp;
+}
+
 string GUIInterface::getCardImageFileName(char suit, unsigned rank) {
 
 	string rankString{ to_string(rank) };
