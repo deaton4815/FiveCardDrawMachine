@@ -2,12 +2,12 @@
 
 using namespace std;
 
-void Dealer::newGame() {
+bool Dealer::setWager(unsigned wager) { return m_payService.wagerFunds(wager); }
+
+void Dealer::newHand() {
 	m_deck.shuffleDeck();
 	dealHand();
 }
-
-bool Dealer::setWager(unsigned wager) { return m_payService.wagerFunds(wager); }
 
 void Dealer::executeKeeperSelection(vector<unsigned> keepers) {
 	m_hand.setDiscards(keepers);

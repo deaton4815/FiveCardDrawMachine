@@ -10,8 +10,8 @@ class Dealer
 {
 public:
 
-	void newGame();
 	bool setWager(unsigned);
+	void newHand();
 	void executeKeeperSelection(std::vector<unsigned>);
 	
 	std::size_t getHandSize() const;

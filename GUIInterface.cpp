@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void GUIInterface::newGame() { m_dealer.newGame(); }
+void GUIInterface::newHand() { m_dealer.newHand(); }
 
 vector<string> GUIInterface::getHandImageFileNames() {
 
