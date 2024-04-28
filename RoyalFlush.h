@@ -11,6 +11,6 @@ private:
 	StraightFlush m_straightFlush;
 
 	unsigned m_multiplier{ 250 };
-	std::string{ "Royal Flush" };
+	std::string m_name{ "Royal Flush" };
 };
 
