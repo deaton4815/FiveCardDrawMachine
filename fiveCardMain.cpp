@@ -60,6 +60,9 @@ void fiveCardMain::initializeBettingDisplay() {
     m_insertCoinButon->Bind(wxEVT_BUTTON, &fiveCardMain::onInsertCoin, this);
     m_bettingSizer->Add(m_insertCoinButon, 0, wxALL, 5);
 
+    //Cash out button
+    m_cashOutButton->Bind(wxEVT_BUTTON, &fiveCardMain::onCashOut, this);
+    m_bettingSizer->Add(m_cashOutButton, 0, wxALL, 5);
 }
 
 // Card selection
@@ -102,6 +105,13 @@ void fiveCardMain::initializeCardSelection() {
 
         // Add coin to funds
         m_dealer.addFunds(1);
+        updateFundsDisplay();
+        this->Layout();
+    }
+
+    void fiveCardMain::onCashOut(wxCommandEvent& event) {
+        unsigned cashVoucher{ m_dealer.cashOut() };
+        wxMessageBox(wxString::Format("Printing cash voucher for %u coins", cashVoucher));
         updateFundsDisplay();
         this->Layout();
     }
