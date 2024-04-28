@@ -69,35 +69,8 @@ void fiveCardMain::intializeSubmitKeepersButton(wxBoxSizer* sizer) {
         newGameBtn->Hide();
         m_dealerInterface.newGame();
 
-        // Clear previous images and selections if any
-        for (auto& bitmap : cardBitmaps) {
-            bitmap->Destroy();
-        }
-        cardBitmaps.clear();
-        cardSelections.clear();
-
-        // Clear existing cards from sizer before adding new ones
-        cardSizer->Clear(true);
-
-        const int cardWidth = 100;
-        const int cardHeight = 150;
-
-        // Load new images, resize them, and display them
-        std::vector<std::string> cardImages = getCardImages();
-        for (const std::string& imagePath : cardImages) {
-            wxImage image(wxString(imagePath), wxBITMAP_TYPE_PNG);
-            if (!image.IsOk()) {
-                wxLogError("Failed to load image from path: %s", imagePath);
-                continue;
-            }
-
-            image.Rescale(cardWidth, cardHeight);
-            wxStaticBitmap* bitmap = new wxStaticBitmap(this, wxID_ANY, wxBitmap(image));
-            bitmap->Bind(wxEVT_LEFT_DOWN, &fiveCardMain::OnToggleCard, this);
-            cardBitmaps.push_back(bitmap);
-            cardSelections.push_back(false);
-            cardSizer->Add(bitmap, 0, wxALL, 5);
-        }
+        displayCards();
+        
         selectionPrompt->Show();  // Show the selection prompt
         UpdateSelectedCardsDisplay();
         selectedCardsText->Show();  // Show the selected cards text only after cards are loaded
@@ -136,6 +109,39 @@ void fiveCardMain::intializeSubmitKeepersButton(wxBoxSizer* sizer) {
             }
         }
         wxMessageBox(message, "Submission Result", wxOK | wxICON_INFORMATION, this);
+    }
+
+    void fiveCardMain::displayCards() {
+
+        // Clear previous images and selections if any
+        for (auto& bitmap : cardBitmaps) {
+            bitmap->Destroy();
+        }
+        cardBitmaps.clear();
+        cardSelections.clear();
+
+        // Clear existing cards from sizer before adding new ones
+        cardSizer->Clear(true);
+
+        const int cardWidth = 100;
+        const int cardHeight = 150;
+
+        // Load new images, resize them, and display them
+        std::vector<std::string> cardImages = getCardImages();
+        for (const std::string& imagePath : cardImages) {
+            wxImage image(wxString(imagePath), wxBITMAP_TYPE_PNG);
+            if (!image.IsOk()) {
+                wxLogError("Failed to load image from path: %s", imagePath);
+                continue;
+            }
+
+            image.Rescale(cardWidth, cardHeight);
+            wxStaticBitmap* bitmap = new wxStaticBitmap(this, wxID_ANY, wxBitmap(image));
+            bitmap->Bind(wxEVT_LEFT_DOWN, &fiveCardMain::OnToggleCard, this);
+            cardBitmaps.push_back(bitmap);
+            cardSelections.push_back(false);
+            cardSizer->Add(bitmap, 0, wxALL, 5);
+        }
     }
 
     vector<string> fiveCardMain::getCardImages() {

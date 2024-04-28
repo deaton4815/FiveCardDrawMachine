@@ -33,6 +33,8 @@ private:
 	void OnToggleCard(wxMouseEvent&);
 	void OnSubmitKeepers(wxCommandEvent&);
 
+	void displayCards();
+
 	void UpdateSelectedCardsDisplay();
 	std::vector<std::string> getCardImages();
 };
