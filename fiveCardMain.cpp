@@ -102,13 +102,14 @@ void fiveCardMain::intializeSubmitKeepersButton(wxBoxSizer* sizer) {
 
     void fiveCardMain::OnSubmitKeepers(wxCommandEvent& event) {
         // Implement functionality to handle the submission of selected cards
-        wxString message = "Keepers submitted:\n";
-        for (size_t i = 0; i < cardSelections.size(); ++i) {
-            if (cardSelections[i]) {
-                message += wxString::Format("Card %d\n", int(i + 1));
-            }
-        }
-        wxMessageBox(message, "Submission Result", wxOK | wxICON_INFORMATION, this);
+
+        selectionPrompt->Hide();
+        selectedCardsText->Hide();
+        submitKeepersBtn->Hide();
+
+        m_dealerInterface.executeKeeperSelection(cardSelections);
+        displayCards();
+        this->Layout();
     }
 
     void fiveCardMain::displayCards() {
