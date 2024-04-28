@@ -30,6 +30,7 @@
     <ClInclude Include="Hand.h" />
     <ClInclude Include="PayService.h" />
     <ClInclude Include="PokerHand.h" />
+    <ClInclude Include="Straight.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
@@ -43,6 +44,7 @@
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="PayService.cpp" />
     <ClCompile Include="PokerHand.cpp" />
+    <ClCompile Include="Straight.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

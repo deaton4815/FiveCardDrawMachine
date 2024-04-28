@@ -6,6 +6,6 @@ class PokerHand
 {
 public:
 
-	virtual bool isMatch(std::vector<Card>) = 0;
+	virtual bool isMatch(std::vector<Card>) const = 0;
 };
 
