@@ -82,18 +82,20 @@ void fiveCardMain::initializeCardSelection() {
     void fiveCardMain::onNewHand(wxCommandEvent& event) {
 
         // Place bet
-        placeBet();
+        bool sufficientFunds{ placeBet() };
         
-        // New hand
-        m_dealer.newHand();
-        displayCards();
-        
-        // Display card selection
-        m_cardSelectionPrompt->Show();  // Show the selection prompt
-        updateSelectedCardsDisplay();
-        m_selectedCardsText->Show();  // Show the selected cards text only after cards are loaded
-        m_submitKeepersButton->Show();
-        this->Layout();  // Update layout
+        if (sufficientFunds) {
+            // New hand
+            m_dealer.newHand();
+            displayCards();
+
+            // Display card selection
+            m_cardSelectionPrompt->Show();  // Show the selection prompt
+            updateSelectedCardsDisplay();
+            m_selectedCardsText->Show();  // Show the selected cards text only after cards are loaded
+            m_submitKeepersButton->Show();
+            this->Layout();  // Update layout
+        }
     }
 
     void fiveCardMain::onInsertCoin(wxCommandEvent& event) {
@@ -123,17 +125,22 @@ void fiveCardMain::initializeCardSelection() {
         this->Layout();
     }
 
-    void fiveCardMain::placeBet() {
+    bool fiveCardMain::placeBet() {
 
         // Get selected bet
         wxString selectedBet = m_placeBetBox->GetValue();
-        wxMessageBox(wxString::Format("Coin inserted for bet of %s.", selectedBet), "Coin Inserted", wxOK | wxICON_INFORMATION, this);
 
         // Set wager amount
         unsigned wager = stoul(selectedBet.ToStdString(), 0, 10);
-        m_dealer.setWagerAmount(wager);
-        updateWagerDisplay();
-        updateFundsDisplay();
+        bool sufficientFunds{ m_dealer.setWagerAmount(wager) };
+        if (!sufficientFunds) {
+            wxMessageBox("Insufficient Funds");
+        }
+        else {
+            updateWagerDisplay();
+            updateFundsDisplay();
+        }
+        return sufficientFunds;
     }
 
     void fiveCardMain::updateWagerDisplay() {

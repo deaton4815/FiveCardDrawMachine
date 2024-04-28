@@ -45,7 +45,7 @@ private:
 	void onToggleCard(wxMouseEvent&);
 	void onSubmitKeepers(wxCommandEvent&);
 
-	void placeBet();
+	bool placeBet();
 	void displayCards();
 
 	void updateWagerDisplay();
