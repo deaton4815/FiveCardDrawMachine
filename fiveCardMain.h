@@ -24,7 +24,10 @@ private:
 	wxButton* submitKeepersBtn;
 	wxStaticText* selectionPrompt; // Prompt for selecting cards
 
-	void initializeButtons();
+	void initializeNewGameButton(wxBoxSizer*);
+	void initializeCardSelectionPrompt(wxBoxSizer*);
+	void initializeSelectedCardsText(wxBoxSizer*);
+	void intializeSubmitKeepersButton(wxBoxSizer*);
 
 	void OnNewGame(wxCommandEvent&);
 	void OnToggleCard(wxMouseEvent&);

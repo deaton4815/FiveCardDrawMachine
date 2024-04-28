@@ -9,43 +9,59 @@ fiveCardMain::fiveCardMain(const wxString& title, const wxPoint& pos, const wxSi
     , submitKeepersBtn(nullptr)
 {
 
-        // Initialize PNG handler for image loading
+    // Initialize PNG handler for image loading
     wxImage::AddHandler(new wxPNGHandler());
 
     // Main layout sizer
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
-    // New Game button
-    newGameBtn = new wxButton(this, wxID_ANY, wxT("New Game"), wxDefaultPosition, wxDefaultSize);
-    newGameBtn->Bind(wxEVT_BUTTON, &fiveCardMain::OnNewGame, this);
-    mainSizer->Add(newGameBtn, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+    //New Game Button
+    initializeNewGameButton(mainSizer);
 
     // Sizer for the cards
     cardSizer = new wxBoxSizer(wxHORIZONTAL);
     mainSizer->Add(cardSizer, 0, wxALIGN_CENTER | wxALL, 5);
 
-    // Static text for selection prompt, initially hidden
-    selectionPrompt = new wxStaticText(this, wxID_ANY, "Select cards to keep.", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-    selectionPrompt->Hide();
-    mainSizer->Add(selectionPrompt, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+    // Card selection prompt
+    initializeCardSelectionPrompt(mainSizer);
 
     // Static text for displaying selected cards, initially hidden
-    selectedCardsText = new wxStaticText(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-    selectedCardsText->Hide();  // Initially hidden
-    mainSizer->Add(selectedCardsText, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+    initializeSelectedCardsText(mainSizer);
 
-    // Submit Keepers button, initially hidden
-    submitKeepersBtn = new wxButton(this, wxID_ANY, wxT("Submit Keepers"), wxDefaultPosition, wxDefaultSize);
-    submitKeepersBtn->Bind(wxEVT_BUTTON, &fiveCardMain::OnSubmitKeepers, this);
-    submitKeepersBtn->Hide();  // Initially hide the button
-    mainSizer->Add(submitKeepersBtn, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+    // Submit keepers button
+    intializeSubmitKeepersButton(mainSizer); 
 
     this->SetSizer(mainSizer);
     this->Layout();
 }
 
-void fiveCardMain::initializeButtons() {
+// New Game button
+void fiveCardMain::initializeNewGameButton(wxBoxSizer* sizer) {
+    newGameBtn = new wxButton(this, wxID_ANY, wxT("New Game"), wxDefaultPosition, wxDefaultSize);
+    newGameBtn->Bind(wxEVT_BUTTON, &fiveCardMain::OnNewGame, this);
+    sizer->Add(newGameBtn, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+}
 
+// Static text for selection prompt, initially hidden
+void fiveCardMain::initializeCardSelectionPrompt(wxBoxSizer* sizer) {
+    selectionPrompt = new wxStaticText(this, wxID_ANY, "Select cards to keep.", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    selectionPrompt->Hide();
+    sizer->Add(selectionPrompt, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+}
+
+// Static text for displaying selected cards, initially hidden
+void fiveCardMain::initializeSelectedCardsText(wxBoxSizer* sizer) {
+    selectedCardsText = new wxStaticText(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    selectedCardsText->Hide();  // Initially hidden
+    sizer->Add(selectedCardsText, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+}
+
+// Submit Keepers button, initially hidden
+void fiveCardMain::intializeSubmitKeepersButton(wxBoxSizer* sizer) {
+    submitKeepersBtn = new wxButton(this, wxID_ANY, wxT("Submit Keepers"), wxDefaultPosition, wxDefaultSize);
+    submitKeepersBtn->Bind(wxEVT_BUTTON, &fiveCardMain::OnSubmitKeepers, this);
+    submitKeepersBtn->Hide();  // Initially hide the button
+    sizer->Add(submitKeepersBtn, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
 }
 
     void fiveCardMain::OnNewGame(wxCommandEvent& event) {
