@@ -34,6 +34,7 @@
     <ClInclude Include="RoyalFlush.h" />
     <ClInclude Include="Straight.h" />
     <ClInclude Include="StraightFlush.h" />
+    <ClInclude Include="ThreeOfAKind.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
@@ -51,6 +52,7 @@
     <ClCompile Include="RoyalFlush.cpp" />
     <ClCompile Include="Straight.cpp" />
     <ClCompile Include="StraightFlush.cpp" />
+    <ClCompile Include="ThreeOfAKind.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
