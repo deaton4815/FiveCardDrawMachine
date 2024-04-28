@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void GUIInterface::newGame() { m_dealer.newGame(); }
+void GUIInterface::newHand() { m_dealer.newHand(); }
 
 vector<string> GUIInterface::getHandImageFileNames() {
 
@@ -35,6 +35,12 @@ void GUIInterface::executeKeeperSelection(vector<bool> selections) {
 	}
 	m_dealer.executeKeeperSelection(keepers);
 }
+
+bool GUIInterface::setWagerAmount(unsigned wager) {return m_dealer.setWager(wager); }
+void GUIInterface::addFunds(unsigned deposit) { m_dealer.addFunds(deposit); }
+unsigned GUIInterface::cashOut() { return m_dealer.cashOut(); }
+unsigned GUIInterface::getWager() const { return m_dealer.getWagerAmount(); }
+unsigned GUIInterface::getFunds() const { return m_dealer.getFunds(); }
 
 string GUIInterface::getCardImageFileName(char suit, unsigned rank) {
 

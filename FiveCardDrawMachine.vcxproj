@@ -27,6 +27,7 @@
     <ClInclude Include="fiveCardMain.h" />
     <ClInclude Include="GUIInterface.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="PayService.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
@@ -37,6 +38,7 @@
     <ClCompile Include="fiveCardMain.cpp" />
     <ClCompile Include="GUIInterface.cpp" />
     <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="PayService.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
