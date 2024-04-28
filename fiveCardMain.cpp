@@ -3,21 +3,13 @@
 using namespace std;
 
 fiveCardMain::fiveCardMain(const wxString& title, const wxPoint& pos, const wxSize& size)
-        : wxFrame(NULL, wxID_ANY, title, pos, size) 
-    , selectionPrompt(nullptr)
-    , selectedCardsText(nullptr)
-    , submitKeepersBtn(nullptr)
+    : wxFrame(NULL, wxID_ANY, title, pos, size)
+    , m_cardInterface(m_mainSizer)
 {
-
-    // Initialize PNG handler for image loading
-    wxImage::AddHandler(new wxPNGHandler());
-
-    // Main layout sizer
-    wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
     // Top display sizer for Wager and Funds
     wxBoxSizer* topDisplaySizer = new wxBoxSizer(wxHORIZONTAL);
-    mainSizer->Add(topDisplaySizer, 0, wxEXPAND | wxALL, 5);
+    m_mainSizer->Add(topDisplaySizer, 0, wxEXPAND | wxALL, 5);
 
     // Wager display
     wagerDisplay = new wxStaticText(this, wxID_ANY, "Wager: ", wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT);
@@ -29,14 +21,12 @@ fiveCardMain::fiveCardMain(const wxString& title, const wxPoint& pos, const wxSi
     topDisplaySizer->Add(fundsDisplay, 1, wxEXPAND | wxALL, 5);
     updateFundsDisplay();  // Function to set text from external function
 
-    // Sizer for the cards
-    cardSizer = new wxBoxSizer(wxHORIZONTAL);
-    mainSizer->Add(cardSizer, 0, wxALIGN_CENTER | wxALL, 5);
-    displayCards();
+    // Display Card Backs
+    m_cardInterface.displayCards(getCardImages());
 
     // Betting sizer
     wxBoxSizer* bettingSizer = new wxBoxSizer(wxHORIZONTAL);
-    mainSizer->Add(bettingSizer, 0, wxALIGN_LEFT | wxALL, 5);
+    m_mainSizer->Add(bettingSizer, 0, wxALIGN_LEFT | wxALL, 5);
 
     // Place bet box
     initializePlaceBetBox(bettingSizer);
@@ -46,16 +36,13 @@ fiveCardMain::fiveCardMain(const wxString& title, const wxPoint& pos, const wxSi
     dealCardsBtn->Bind(wxEVT_BUTTON, &fiveCardMain::OnNewGame, this);
     bettingSizer->Add(dealCardsBtn, 0, wxALL, 5);
 
-    // Card selection prompt
-    initializeCardSelectionPrompt(mainSizer);
-
-    // Static text for displaying selected cards, initially hidden
-    initializeSelectedCardsText(mainSizer);
+    // Card selection intialization
+    m_cardInterface.intializeCardSelection(m_mainSizer);
 
     // Submit keepers button
-    initializeSubmitKeepersButton(mainSizer); 
+    initializeSubmitKeepersButton(m_mainSizer); 
 
-    this->SetSizer(mainSizer);
+    this->SetSizer(m_mainSizer);
     this->Layout();
 }
 
@@ -69,20 +56,6 @@ void fiveCardMain::initializePlaceBetBox(wxBoxSizer* sizer) {
 
     // Set the default selection for the place bet box
     placeBetBox->SetSelection(0);  // Selects the first item in the list, "1"
-}
-
-// Static text for selection prompt, initially hidden
-void fiveCardMain::initializeCardSelectionPrompt(wxBoxSizer* sizer) {
-    selectionPrompt = new wxStaticText(this, wxID_ANY, "Select cards to keep.", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-    selectionPrompt->Hide();
-    sizer->Add(selectionPrompt, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
-}
-
-// Static text for displaying selected cards, initially hidden
-void fiveCardMain::initializeSelectedCardsText(wxBoxSizer* sizer) {
-    selectedCardsText = new wxStaticText(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-    selectedCardsText->Hide();  // Initially hidden
-    sizer->Add(selectedCardsText, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
 }
 
 // Submit Keepers button, initially hidden
@@ -108,84 +81,19 @@ void fiveCardMain::initializeSubmitKeepersButton(wxBoxSizer* sizer) {
 
         m_dealerInterface.newGame();
 
-        displayCards();
-        
-        selectionPrompt->Show();  // Show the selection prompt
-        UpdateSelectedCardsDisplay();
-        selectedCardsText->Show();  // Show the selected cards text only after cards are loaded
+        m_cardInterface.newHand(getCardImages());
         submitKeepersBtn->Show();
         this->Layout();  // Update layout
-    }
-
-    void fiveCardMain::OnToggleCard(wxMouseEvent& event) {
-        wxStaticBitmap* clickedBitmap = dynamic_cast<wxStaticBitmap*>(event.GetEventObject());
-        size_t index = std::distance(cardBitmaps.begin(), std::find(cardBitmaps.begin(), cardBitmaps.end(), clickedBitmap));
-        cardSelections[index] = !cardSelections[index];  // Toggle selection
-        UpdateSelectedCardsDisplay();  // Update the display text
-    }
-
-    void fiveCardMain::UpdateSelectedCardsDisplay() {
-        wxString selectedText = "Selected Cards: ";
-        bool found = false;
-        for (size_t i = 0; i < cardSelections.size(); ++i) {
-            if (cardSelections[i]) {
-                selectedText += wxString::Format("Card %d, ", int(i + 1));
-                found = true;
-            }
-        }
-        if (!found) {
-            selectedText = "No cards selected";
-        }
-        selectedCardsText->SetLabel(selectedText);
     }
 
     void fiveCardMain::OnSubmitKeepers(wxCommandEvent& event) {
         // Implement functionality to handle the submission of selected cards
 
-        selectionPrompt->Hide();
-        selectedCardsText->Hide();
+        vector<bool> cardSelections = m_cardInterface.keepersSelected();
         submitKeepersBtn->Hide();
-
         m_dealerInterface.executeKeeperSelection(cardSelections);
-        displayCards();
+        m_cardInterface.displayCards(getCardImages());
         this->Layout();
-    }
-
-    void fiveCardMain::displayCards() {
-
-        // Clear previous images and selections if any
-        for (auto& bitmap : cardBitmaps) {
-            bitmap->Destroy();
-        }
-        cardBitmaps.clear();
-        cardSelections.clear();
-
-        // Clear existing cards from sizer before adding new ones
-        cardSizer->Clear(true);
-
-        const int cardWidth = 100;
-        const int cardHeight = 150;
-
-        // Load new images, resize them, and display them
-        std::vector<std::string> cardImages = getCardImages();
-        if (cardImages.empty()) {
-            wxLogError("No card images available to display.");
-            return;
-        }
-        for (const std::string& imagePath : cardImages) {
-            wxImage image(wxString(imagePath), wxBITMAP_TYPE_PNG);
-            if (!image.IsOk()) {
-                wxLogError("Failed to load image from path: %s", imagePath);
-                continue;
-            }
-
-            image.Rescale(cardWidth, cardHeight);
-            wxStaticBitmap* bitmap = new wxStaticBitmap(this, wxID_ANY, wxBitmap(image));
-            bitmap->Bind(wxEVT_LEFT_DOWN, &fiveCardMain::OnToggleCard, this);
-            cardBitmaps.push_back(bitmap);
-            cardSelections.push_back(false);
-            cardSizer->Add(bitmap, 0, wxALL, 5);
-        }
     }
 
     void fiveCardMain::updateWagerDisplay() {
@@ -199,5 +107,9 @@ void fiveCardMain::initializeSubmitKeepersButton(wxBoxSizer* sizer) {
     }
 
     vector<string> fiveCardMain::getCardImages() {
-        return m_dealerInterface.getHandImageFileNames();
+        vector<string> cardFiles{ m_dealerInterface.getHandImageFileNames() };
+        if (cardFiles.empty()) {
+            wxLogError("No card images available to display.");
+        }
+        return cardFiles;
     }
