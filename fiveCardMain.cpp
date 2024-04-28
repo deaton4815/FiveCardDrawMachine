@@ -15,13 +15,22 @@ fiveCardMain::fiveCardMain(const wxString& title, const wxPoint& pos, const wxSi
     // Main layout sizer
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
-    //New Game Button
-    initializeNewGameButton(mainSizer);
-
     // Sizer for the cards
     cardSizer = new wxBoxSizer(wxHORIZONTAL);
     mainSizer->Add(cardSizer, 0, wxALIGN_CENTER | wxALL, 5);
     displayCards();
+
+    // Betting sizer
+    wxBoxSizer* bettingSizer = new wxBoxSizer(wxHORIZONTAL);
+    mainSizer->Add(bettingSizer, 0, wxALIGN_LEFT | wxALL, 5);
+
+    // Place bet box
+    initializePlaceBetBox(bettingSizer);
+
+    // Deal cards button
+    wxButton* dealCardsBtn = new wxButton(this, wxID_ANY, wxT("Deal Cards"), wxDefaultPosition, wxDefaultSize);
+    dealCardsBtn->Bind(wxEVT_BUTTON, &fiveCardMain::OnNewGame, this);
+    bettingSizer->Add(dealCardsBtn, 0, wxALL, 5);
 
     // Card selection prompt
     initializeCardSelectionPrompt(mainSizer);
@@ -36,11 +45,13 @@ fiveCardMain::fiveCardMain(const wxString& title, const wxPoint& pos, const wxSi
     this->Layout();
 }
 
-// New Game button
-void fiveCardMain::initializeNewGameButton(wxBoxSizer* sizer) {
-    newGameBtn = new wxButton(this, wxID_ANY, wxT("New Game"), wxDefaultPosition, wxDefaultSize);
-    newGameBtn->Bind(wxEVT_BUTTON, &fiveCardMain::OnNewGame, this);
-    sizer->Add(newGameBtn, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+// Place bet box
+void fiveCardMain::initializePlaceBetBox(wxBoxSizer* sizer) {
+    wxStaticText* wagerLabel = new wxStaticText(this, wxID_ANY, wxT("Wager:"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    sizer->Add(wagerLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+    wxString betOptions[] = { wxT("1"), wxT("2"), wxT("3"), wxT("4"), wxT("5") };
+    placeBetBox = new wxComboBox(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDefaultSize, 5, betOptions, wxCB_READONLY);
+    sizer->Add(placeBetBox, 0, wxALL, 5);
 }
 
 // Static text for selection prompt, initially hidden
@@ -67,7 +78,10 @@ void fiveCardMain::intializeSubmitKeepersButton(wxBoxSizer* sizer) {
 
     void fiveCardMain::OnNewGame(wxCommandEvent& event) {
 
-        newGameBtn->Hide();
+        wxString selectedBet = placeBetBox->GetValue();
+        wxMessageBox(wxString::Format("Coin inserted for bet of %s.", selectedBet), "Coin Inserted", wxOK | wxICON_INFORMATION, this);
+
+        //newGameBtn->Hide();
         m_dealerInterface.newGame();
 
         displayCards();
