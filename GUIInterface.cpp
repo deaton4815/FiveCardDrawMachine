@@ -5,15 +5,23 @@ using namespace std;
 void GUIInterface::newGame() { m_dealer.newGame(); }
 
 vector<string> GUIInterface::getHandImageFileNames() {
+
+	size_t handSize{ m_dealer.getHandSize() };
+
 	vector<string> images;
+	images.reserve(handSize);
 
 	vector<char> suits{ m_dealer.getHandSuits() };
 	vector<unsigned> ranks{ m_dealer.getHandRanks() };
 
-	size_t size{ suits.size() };
-	images.reserve(size);
-	for (size_t i{ 0 }; i < size; ++i) {
-		images.push_back(getCardImageFileName(suits.at(i), ranks.at(i)));
+	if (suits.empty() || ranks.empty()) {
+		vector<string> cardBacks(handSize, "card_images/back.png");
+		images = cardBacks;
+	}
+	else {
+		for (size_t i{ 0 }; i < handSize; ++i) {
+			images.push_back(getCardImageFileName(suits.at(i), ranks.at(i)));
+		}
 	}
 	return images;
 }

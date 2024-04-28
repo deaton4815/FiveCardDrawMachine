@@ -21,6 +21,7 @@ fiveCardMain::fiveCardMain(const wxString& title, const wxPoint& pos, const wxSi
     // Sizer for the cards
     cardSizer = new wxBoxSizer(wxHORIZONTAL);
     mainSizer->Add(cardSizer, 0, wxALIGN_CENTER | wxALL, 5);
+    displayCards();
 
     // Card selection prompt
     initializeCardSelectionPrompt(mainSizer);

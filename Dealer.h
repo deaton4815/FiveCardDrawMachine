@@ -12,6 +12,7 @@ public:
 	void newGame();
 	void executeKeeperSelection(std::vector<unsigned>);
 	
+	std::size_t getHandSize() const;
 	std::vector<char> getHandSuits() const;
 	std::vector<unsigned> getHandRanks() const;
 

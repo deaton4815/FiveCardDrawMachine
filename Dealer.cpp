@@ -20,6 +20,7 @@ void Dealer::executeKeeperSelection(vector<unsigned> keepers) {
 	m_hand.replaceDiscards(replacements);
 }
 
+size_t Dealer::getHandSize() const { return m_hand.getHandSize(); }
 vector<char> Dealer::getHandSuits() const { return m_hand.getHandSuits(); }
 vector<unsigned> Dealer::getHandRanks() const { return m_hand.getHandRanks(); }
 
