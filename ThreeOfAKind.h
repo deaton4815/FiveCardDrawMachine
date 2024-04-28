@@ -11,4 +11,3 @@ private:
 	unsigned m_multiplier{ 3 };
 	std::string m_name{ "Three of a Kind" };
 };
-
