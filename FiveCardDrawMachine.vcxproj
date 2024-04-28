@@ -30,12 +30,14 @@
     <ClInclude Include="FullHouse.h" />
     <ClInclude Include="GUIInterface.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="JacksOrBetter.h" />
     <ClInclude Include="PayService.h" />
     <ClInclude Include="PokerHand.h" />
     <ClInclude Include="RoyalFlush.h" />
     <ClInclude Include="Straight.h" />
     <ClInclude Include="StraightFlush.h" />
     <ClInclude Include="ThreeOfAKind.h" />
+    <ClInclude Include="TwoPair.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
@@ -49,12 +51,14 @@
     <ClCompile Include="FullHouse.cpp" />
     <ClCompile Include="GUIInterface.cpp" />
     <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="JacksOrBetter.cpp" />
     <ClCompile Include="PayService.cpp" />
     <ClCompile Include="PokerHand.cpp" />
     <ClCompile Include="RoyalFlush.cpp" />
     <ClCompile Include="Straight.cpp" />
     <ClCompile Include="StraightFlush.cpp" />
     <ClCompile Include="ThreeOfAKind.cpp" />
+    <ClCompile Include="TwoPair.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
