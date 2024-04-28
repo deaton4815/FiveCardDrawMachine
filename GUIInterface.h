@@ -10,6 +10,8 @@ class GUIInterface
 
 public:
 	void newGame();
+	void executeKeeperSelection(std::vector<bool>);
+
 	std::vector<std::string> getHandImageFileNames();
 
 private:
