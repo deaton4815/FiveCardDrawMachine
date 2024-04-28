@@ -36,3 +36,6 @@ void HandCalculator::calculateHand(vector<Card> hand) {
 		m_name = "Losing Hand";
 	}
 }
+
+unsigned HandCalculator::getMultiplier() const { return m_multiplier; }
+string HandCalculator::getHandName() const { return m_name; }

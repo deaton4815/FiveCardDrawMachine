@@ -15,7 +15,7 @@ vector<unsigned> PokerHand::getSortedRanks(vector<Card> hand) const {
 	return ranks;
 }
 
-template<typename T> bool PokerHand::hasNMatches(vector<T> values, unsigned n) const {
+bool PokerHand::hasNMatches(vector<unsigned> values, unsigned n) const {
 	bool nMatches{ false };
 
 	unsigned count{ 1 };

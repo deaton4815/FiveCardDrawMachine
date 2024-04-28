@@ -25,8 +25,8 @@ public:
 
 	void calculateHand(std::vector<Card>);
 
-	unsigned getMultiplier();
-	std::string getHandName();
+	unsigned getMultiplier() const;
+	std::string getHandName() const;
 
 private:
 	/*
