@@ -15,7 +15,6 @@ public:
 protected:
 	std::vector<unsigned> getSortedRanks(std::vector<Card>) const;
 	template<typename T> bool hasNMatches(std::vector<T>, unsigned) const;
-	std::vector<unsigned> getSubvector(std::vector<unsigned>, unsigned, unsigned) const;
 
 private:
 	unsigned m_multiplier;

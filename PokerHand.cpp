@@ -33,10 +33,3 @@ template<typename T> bool PokerHand::hasNMatches(vector<T> values, unsigned n) c
 	}
 	return nMatches;
 }
-
-vector<unsigned> PokerHand::getSubvector(vector<unsigned> ranks, unsigned offsetStart, unsigned offsetFinish) const {
-	auto first{ cbegin(ranks) + offsetStart };
-	auto last{ cbegin(ranks) + offsetFinish };
-	vector<unsigned> subVector(first, last);
-	return subVector;
-}
