@@ -9,9 +9,10 @@ class GUIInterface
 {
 
 public:
-	void newGame();
+	void newHand();
 	void executeKeeperSelection(std::vector<bool>);
 
+	bool setWagerAmount(unsigned);
 	unsigned getWager() const;
 	unsigned getFunds() const;
 

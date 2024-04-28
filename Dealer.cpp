@@ -2,15 +2,10 @@
 
 using namespace std;
 
-void Dealer::newGame() {
+bool Dealer::setWager(unsigned wager) { return m_payService.wagerFunds(wager); }
 
-	if (!m_firstHand) {
-		m_deck.addCards(m_hand.getAllCards());
-	}
-	m_firstHand = false;
-
-	m_hand.resetHand();
-	//m_deck.shuffleDeck();
+void Dealer::newHand() {
+	m_deck.shuffleDeck();
 	dealHand();
 }
 
@@ -23,6 +18,9 @@ void Dealer::executeKeeperSelection(vector<unsigned> keepers) {
 size_t Dealer::getHandSize() const { return m_hand.getHandSize(); }
 vector<char> Dealer::getHandSuits() const { return m_hand.getHandSuits(); }
 vector<unsigned> Dealer::getHandRanks() const { return m_hand.getHandRanks(); }
+
+unsigned Dealer::getWagerAmount() const { return m_payService.getWager(); }
+unsigned Dealer::getFunds() const { return m_payService.getFunds(); }
 
 void Dealer::dealHand() {
 	vector<Card> dealt = m_deck.getCards(m_hand.getHandSize());
