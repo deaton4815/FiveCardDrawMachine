@@ -13,6 +13,8 @@ public:
 	void resetHand();
 
 	const std::size_t getHandSize() const;
+	std::vector<char> getHandSuits() const;
+	std::vector<unsigned> getHandRanks() const;
 	std::size_t	getDiscardCount() const;
 	std::vector<Card> getAllCards() const;
 

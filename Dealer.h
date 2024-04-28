@@ -9,11 +9,16 @@ class Dealer
 {
 public:
 
-	void dealHand();
+	void newGame();
+	
+	std::vector<char> getHandSuits() const;
+	std::vector<unsigned> getHandRanks() const;
 
 private:
 
 	CardDeck m_deck;
 	Hand m_hand;
+
+	void dealHand();
 };
 

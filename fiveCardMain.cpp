@@ -23,6 +23,9 @@ fiveCardMain::~fiveCardMain() = default;
 
 // Event handler for the button click
 void fiveCardMain::OnNewGame(wxCommandEvent& event) {
+    //New Game
+    m_dealerInterface.newGame();
+
     std::vector<std::string> cardImages = getCardImages();  // Get card images from an external function
     wxBoxSizer* sizer = dynamic_cast<wxBoxSizer*>(this->GetSizer());
 
@@ -56,12 +59,7 @@ void fiveCardMain::OnNewGame(wxCommandEvent& event) {
 
 // Dummy function that simulates getting image paths
 vector<string> fiveCardMain::getCardImages() {
-    return {
 
-        "card_images/2_of_clubs.png",
-        "card_images/3_of_clubs.png",
-        "card_images/4_of_clubs.png",
-        "card_images/5_of_clubs.png",
-        "card_images/6_of_clubs.png"
-    };
+    vector<string> imageFileNames{ m_dealerInterface.getHandImageFileNames() };
+    return imageFileNames;
 }
