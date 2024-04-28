@@ -29,6 +29,7 @@
     <ClInclude Include="FourOfAKind.h" />
     <ClInclude Include="FullHouse.h" />
     <ClInclude Include="GUIInterface.h" />
+    <ClInclude Include="HancCalculator.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="JacksOrBetter.h" />
     <ClInclude Include="PayService.h" />
@@ -50,6 +51,7 @@
     <ClCompile Include="FourOfAKind.cpp" />
     <ClCompile Include="FullHouse.cpp" />
     <ClCompile Include="GUIInterface.cpp" />
+    <ClCompile Include="HancCalculator.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="JacksOrBetter.cpp" />
     <ClCompile Include="PayService.cpp" />
