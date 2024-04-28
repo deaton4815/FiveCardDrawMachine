@@ -10,6 +10,7 @@ class Dealer
 public:
 
 	void newGame();
+	void executeKeeperSelection(std::vector<unsigned>);
 	
 	std::vector<char> getHandSuits() const;
 	std::vector<unsigned> getHandRanks() const;
@@ -18,6 +19,8 @@ private:
 
 	CardDeck m_deck;
 	Hand m_hand;
+
+	bool m_firstHand{ true };
 
 	void dealHand();
 };

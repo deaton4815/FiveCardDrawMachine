@@ -18,6 +18,16 @@ vector<string> GUIInterface::getHandImageFileNames() {
 	return images;
 }
 
+void GUIInterface::executeKeeperSelection(vector<bool> selections) {
+	vector<unsigned> keepers;
+	for (size_t i{ 0 }; i < selections.size(); ++i) {
+		if (selections.at(i)) {
+			keepers.push_back(static_cast<unsigned>(i));
+		}
+	}
+	m_dealer.executeKeeperSelection(keepers);
+}
+
 string GUIInterface::getCardImageFileName(char suit, unsigned rank) {
 
 	string rankString{ to_string(rank) };

@@ -3,7 +3,21 @@
 using namespace std;
 
 void Dealer::newGame() {
+
+	if (!m_firstHand) {
+		m_deck.addCards(m_hand.getAllCards());
+	}
+	m_firstHand = false;
+
+	m_hand.resetHand();
+	//m_deck.shuffleDeck();
 	dealHand();
+}
+
+void Dealer::executeKeeperSelection(vector<unsigned> keepers) {
+	m_hand.setDiscards(keepers);
+	vector<Card> replacements = m_deck.getCards(m_hand.getDiscardCount());
+	m_hand.replaceDiscards(replacements);
 }
 
 vector<char> Dealer::getHandSuits() const { return m_hand.getHandSuits(); }
