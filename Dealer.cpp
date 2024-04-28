@@ -4,6 +4,7 @@ using namespace std;
 
 bool Dealer::setWager(unsigned wager) { return m_payService.wagerFunds(wager); }
 void Dealer::addFunds(unsigned amount) { m_payService.addFunds(amount); }
+unsigned Dealer::cashOut() { unsigned funds{ m_payService.cashOut() }; }
 
 void Dealer::newHand() {
 	m_deck.shuffleDeck();

@@ -12,6 +12,7 @@ public:
 
 	bool setWager(unsigned);
 	void addFunds(unsigned);
+	unsigned cashOut();
 
 	void newHand();
 	void executeKeeperSelection(std::vector<unsigned>);

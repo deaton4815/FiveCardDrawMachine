@@ -15,7 +15,7 @@ bool PayService::wagerFunds(unsigned wager) {
 
 void PayService::resetWager() { m_wager = 0; }
 unsigned PayService::cashOut() {
-	unsigned cashVoucher{ m_funds };
+	unsigned cashVoucher{ getFunds()};
 	m_funds = 0;
 	return cashVoucher;
 }
