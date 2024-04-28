@@ -1,14 +1,40 @@
 #pragma once
 
 #include "wx/wx.h"
+#include "wx/imagpng.h"
+#include <vector>
+#include <string>
+
+#include "GUIInterface.h"
 
 class fiveCardMain : public wxFrame
 {
 public:
-	fiveCardMain();
-	~fiveCardMain();
+	fiveCardMain(const wxString&, const wxPoint&, const wxSize&);
 
-	wxButton* m_btn1 = nullptr;
-	wxTextCtrl* m_text1 = nullptr;
-	wxListBox* m_list1 = nullptr;
+private:
+
+	GUIInterface m_dealerInterface;
+
+	wxButton* newGameBtn;
+	wxBoxSizer* cardSizer;  // Sizer for the cards
+	wxStaticText* selectedCardsText;  // Text control for displaying selected cards
+	std::vector<wxStaticBitmap*> cardBitmaps;  // Holds pointers to the card images
+	std::vector<bool> cardSelections;  // Tracks selection state of each card
+	wxButton* submitKeepersBtn;
+	wxStaticText* selectionPrompt; // Prompt for selecting cards
+
+	void initializeNewGameButton(wxBoxSizer*);
+	void initializeCardSelectionPrompt(wxBoxSizer*);
+	void initializeSelectedCardsText(wxBoxSizer*);
+	void intializeSubmitKeepersButton(wxBoxSizer*);
+
+	void OnNewGame(wxCommandEvent&);
+	void OnToggleCard(wxMouseEvent&);
+	void OnSubmitKeepers(wxCommandEvent&);
+
+	void displayCards();
+
+	void UpdateSelectedCardsDisplay();
+	std::vector<std::string> getCardImages();
 };

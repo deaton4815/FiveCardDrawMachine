@@ -25,6 +25,7 @@
     <ClInclude Include="Dealer.h" />
     <ClInclude Include="fiveCardApp.h" />
     <ClInclude Include="fiveCardMain.h" />
+    <ClInclude Include="GUIInterface.h" />
     <ClInclude Include="Hand.h" />
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +35,7 @@
     <ClCompile Include="Dealer.cpp" />
     <ClCompile Include="fiveCardApp.cpp" />
     <ClCompile Include="fiveCardMain.cpp" />
+    <ClCompile Include="GUIInterface.cpp" />
     <ClCompile Include="Hand.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

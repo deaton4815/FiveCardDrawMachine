@@ -21,6 +21,25 @@ void Hand::resetHand() {
 	m_discards.clear();
 }
 
+const size_t Hand::getHandSize() const { return m_handSize; }
+
+vector<char> Hand::getHandSuits() const {
+	vector<char> suits;
+	suits.reserve(m_handSize);
+	for (auto card{ cbegin(m_hand) }; card != cend(m_hand); ++card) {
+		suits.push_back(card->getSuit());
+	}
+	return suits;
+}
+
+vector<unsigned> Hand::getHandRanks() const {
+	vector<unsigned> ranks;
+	ranks.reserve(m_handSize);
+	for (auto card{ cbegin(m_hand) }; card != cend(m_hand); ++card) {
+		ranks.push_back(card->getRank());
+	}
+	return ranks;
+}
 size_t Hand::getDiscardCount() const { return m_discardIndices.size(); }
 
 vector<Card> Hand::getAllCards() const {
