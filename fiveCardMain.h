@@ -24,6 +24,7 @@ private:
 	wxStaticText* wagerDisplay;
 	wxStaticText* fundsDisplay;
 
+	wxStaticText* m_wagerLabel{ new wxStaticText(this, wxID_ANY, wxT("Wager:"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER) };
 	wxComboBox* m_placeBetBox;
 	wxButton* m_dealCardsButton{ new wxButton(this, wxID_ANY, wxT("Deal Cards"), wxDefaultPosition, wxDefaultSize) };
 	wxButton* m_insertCoinButon{ new wxButton(this, wxID_ANY, wxT("Insert Coin"), wxDefaultPosition, wxDefaultSize) };

@@ -45,8 +45,7 @@ void fiveCardMain::initializeBettingDisplay() {
     m_mainSizer->Add(m_bettingSizer, 0, wxALIGN_LEFT | wxALL, 5);
 
     // Place bet box
-    wxStaticText* wagerLabel = new wxStaticText(this, wxID_ANY, wxT("Wager:"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-    m_bettingSizer->Add(wagerLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+    m_bettingSizer->Add(m_wagerLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     wxString betOptions[] = { wxT("1"), wxT("2"), wxT("3"), wxT("4"), wxT("5") };
     m_placeBetBox = new wxComboBox(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDefaultSize, 5, betOptions, wxCB_READONLY);
     m_bettingSizer->Add(m_placeBetBox, 0, wxALL, 5);
@@ -88,6 +87,14 @@ void fiveCardMain::initializeCardSelection() {
         bool sufficientFunds{ placeBet() };
         
         if (sufficientFunds) {
+
+            // Hide wagering buttons
+            m_wagerLabel->Hide();
+            m_placeBetBox->Hide();
+            m_dealCardsButton->Hide();
+            m_insertCoinButon->Hide();
+            m_cashOutButton->Hide();
+
             // New hand
             m_dealer.newHand();
             displayCards();
