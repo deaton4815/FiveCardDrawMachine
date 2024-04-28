@@ -7,8 +7,7 @@ fiveCardApp::~fiveCardApp() = default;
 
 bool fiveCardApp::OnInit() {
 
-	m_frame1 = new fiveCardMain();
-	m_frame1->Show();
-
-	return true;
+    fiveCardMain* m_frame = new fiveCardMain("Five Card Stud", wxPoint(50, 50), wxSize(450, 340));
+    m_frame->Show(true);
+    return true;
 }
