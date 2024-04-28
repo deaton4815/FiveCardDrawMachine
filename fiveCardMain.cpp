@@ -60,6 +60,9 @@ void fiveCardMain::initializeBettingDisplay() {
     m_insertCoinButon->Bind(wxEVT_BUTTON, &fiveCardMain::onInsertCoin, this);
     m_bettingSizer->Add(m_insertCoinButon, 0, wxALL, 5);
 
+    //Cash out button
+    m_cashOutButton->Bind(wxEVT_BUTTON, &fiveCardMain::onCashOut, this);
+    m_bettingSizer->Add(m_cashOutButton, 0, wxALL, 5);
 }
 
 // Card selection
