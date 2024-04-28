@@ -41,7 +41,7 @@ private:
 	JacksOrBetter m_jacksOrBetter;
 	*/
 
-	array<PokerHand*, 9> m_pokerHands;
+	std::array<PokerHand*, 9> m_pokerHands;
 
 	unsigned m_multiplier{ 0 };
 	std::string m_name{ "" };

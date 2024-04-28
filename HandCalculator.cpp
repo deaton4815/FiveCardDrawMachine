@@ -15,11 +15,12 @@ HandCalculator::HandCalculator() {
 }
 
 HandCalculator::~HandCalculator() {
-	delete m_pokerHands;
+	for (size_t i{ 0 }; i < m_pokerHands.size(); ++i) {
+		delete m_pokerHands[i];
+	}
 }
 
 void HandCalculator::calculateHand(vector<Card> hand) {
-
 	bool match{ false };
 	for (size_t i{ 0 }; i < m_pokerHands.size(); ++i) {
 		if (m_pokerHands[i]->isMatch(hand)) {
