@@ -27,6 +27,7 @@
     <ClInclude Include="fiveCardMain.h" />
     <ClInclude Include="Flush.h" />
     <ClInclude Include="FourOfAKind.h" />
+    <ClInclude Include="FullHouse.h" />
     <ClInclude Include="GUIInterface.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="PayService.h" />
@@ -45,6 +46,7 @@
     <ClCompile Include="fiveCardMain.cpp" />
     <ClCompile Include="Flush.cpp" />
     <ClCompile Include="FourOfAKind.cpp" />
+    <ClCompile Include="FullHouse.cpp" />
     <ClCompile Include="GUIInterface.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="PayService.cpp" />
