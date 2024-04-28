@@ -15,7 +15,7 @@ public:
 
 private:
 
-	unsigned m_funds{ 0 };
+	unsigned m_funds{ 100 };
 	unsigned m_wager{ 0 };
 
 };

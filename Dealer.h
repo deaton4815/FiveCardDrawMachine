@@ -11,11 +11,15 @@ class Dealer
 public:
 
 	void newGame();
+	bool setWager(unsigned);
 	void executeKeeperSelection(std::vector<unsigned>);
 	
 	std::size_t getHandSize() const;
 	std::vector<char> getHandSuits() const;
 	std::vector<unsigned> getHandRanks() const;
+
+	unsigned getWagerAmount() const;
+	unsigned getFunds() const;
 
 private:
 

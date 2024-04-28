@@ -4,6 +4,7 @@
 #include "wx/imagpng.h"
 #include <vector>
 #include <string>
+#include <stdexcept>
 
 #include "GUIInterface.h"
 
@@ -26,7 +27,6 @@ private:
 	wxStaticText* wagerDisplay;
 	wxStaticText* fundsDisplay;
 
-	//void initializeNewGameButton(wxBoxSizer*);
 	void initializePlaceBetBox(wxBoxSizer*);
 	void initializeCardSelectionPrompt(wxBoxSizer*);
 	void initializeSelectedCardsText(wxBoxSizer*);
@@ -38,6 +38,7 @@ private:
 
 	void displayCards();
 
+	void setWagerAmount();
 	void updateWagerDisplay();
 	void updateFundsDisplay();
 

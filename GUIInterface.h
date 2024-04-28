@@ -12,6 +12,7 @@ public:
 	void newGame();
 	void executeKeeperSelection(std::vector<bool>);
 
+	bool setWagerAmount(unsigned);
 	unsigned getWager() const;
 	unsigned getFunds() const;
 

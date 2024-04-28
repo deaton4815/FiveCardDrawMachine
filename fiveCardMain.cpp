@@ -66,6 +66,9 @@ void fiveCardMain::initializePlaceBetBox(wxBoxSizer* sizer) {
     wxString betOptions[] = { wxT("1"), wxT("2"), wxT("3"), wxT("4"), wxT("5") };
     placeBetBox = new wxComboBox(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDefaultSize, 5, betOptions, wxCB_READONLY);
     sizer->Add(placeBetBox, 0, wxALL, 5);
+
+    // Set the default selection for the place bet box
+    placeBetBox->SetSelection(0);  // Selects the first item in the list, "1"
 }
 
 // Static text for selection prompt, initially hidden
@@ -95,7 +98,14 @@ void fiveCardMain::initializeSubmitKeepersButton(wxBoxSizer* sizer) {
         wxString selectedBet = placeBetBox->GetValue();
         wxMessageBox(wxString::Format("Coin inserted for bet of %s.", selectedBet), "Coin Inserted", wxOK | wxICON_INFORMATION, this);
 
-        //newGameBtn->Hide();
+        string wager = selectedBet.ToStdString();
+        unsigned long lresult = stoul(wager, 0, 10);
+        unsigned result = lresult;
+        if (result != lresult) throw out_of_range("Invald wager conversion!");
+        m_dealerInterface.setWagerAmount(result);
+        updateWagerDisplay();
+        updateFundsDisplay();
+
         m_dealerInterface.newGame();
 
         displayCards();
