@@ -19,3 +19,6 @@ bool JacksOrBetter::isMatch(vector<Card> hand) const {
 	}
 	return jacksOrBetter;
 }
+
+unsigned JacksOrBetter::getMultiplier() const { return m_multiplier; }
+string JacksOrBetter::getName() const { return m_name; }

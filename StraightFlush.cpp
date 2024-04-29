@@ -10,3 +10,6 @@ bool StraightFlush::isMatch(vector<Card> hand) const {
 	}
 	return straightFlush;
 }
+
+unsigned StraightFlush::getMultiplier() const { return m_multiplier; }
+string StraightFlush::getName() const { return m_name; }

@@ -12,3 +12,6 @@ bool RoyalFlush::isMatch(vector<Card> hand) const {
 	}
 	return royalFlush;
 }
+
+unsigned RoyalFlush::getMultiplier() const { return m_multiplier; }
+string RoyalFlush::getName() const { return m_name; }

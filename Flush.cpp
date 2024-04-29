@@ -16,3 +16,6 @@ bool Flush::isMatch(vector<Card> hand) const {
 	}
 	return suited;
 }
+
+unsigned Flush::getMultiplier() const { return m_multiplier; }
+string Flush::getName() const { return m_name; }

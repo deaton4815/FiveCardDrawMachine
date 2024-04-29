@@ -13,3 +13,6 @@ bool TwoPair::isMatch(vector<Card> hand) const {
 	}
 	return twoPair;
 }
+
+unsigned TwoPair::getMultiplier() const { return m_multiplier; }
+string TwoPair::getName() const { return m_name; }

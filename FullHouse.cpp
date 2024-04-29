@@ -12,3 +12,6 @@ bool FullHouse::isMatch(vector<Card> hand) const {
 	}
 	return fullHouse;
 }
+
+unsigned FullHouse::getMultiplier() const { return m_multiplier; }
+string FullHouse::getName() const { return m_name; }

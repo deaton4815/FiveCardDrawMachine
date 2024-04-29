@@ -16,3 +16,6 @@ bool Straight::isMatch(vector<Card> hand) const {
 	}
 	return straight;
 }
+
+unsigned Straight::getMultiplier() const { return m_multiplier; }
+string Straight::getName() const { return m_name; }
