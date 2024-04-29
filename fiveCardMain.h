@@ -50,6 +50,9 @@ private:
 
 	bool placeBet();
 	void displayCards();
+	void displayHandResult();
+
+	void resetHand();
 
 	void updateWagerDisplay();
 	void updateFundsDisplay();
