@@ -5,7 +5,7 @@ void PayService::addFunds(unsigned winnings) { m_funds += winnings; }
 
 bool PayService::wagerFunds(unsigned wager) {
 	bool placed{ false };
-	if (wager < m_funds) {
+	if (wager <= m_funds) {
 		m_funds -= wager;
 		m_wager = wager;
 		placed = true;

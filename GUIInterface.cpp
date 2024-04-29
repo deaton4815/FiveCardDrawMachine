@@ -26,21 +26,25 @@ vector<string> GUIInterface::getHandImageFileNames() {
 	return images;
 }
 
-void GUIInterface::executeKeeperSelection(vector<bool> selections) {
+void GUIInterface::setFinalHand(vector<bool> selections) {
 	vector<unsigned> keepers;
 	for (size_t i{ 0 }; i < selections.size(); ++i) {
 		if (selections.at(i)) {
 			keepers.push_back(static_cast<unsigned>(i));
 		}
 	}
-	m_dealer.executeKeeperSelection(keepers);
+	m_dealer.setFinalHand(keepers);
 }
+
+void GUIInterface::resetHand() { m_dealer.resetHand(); }
 
 bool GUIInterface::setWagerAmount(unsigned wager) {return m_dealer.setWager(wager); }
 void GUIInterface::addFunds(unsigned deposit) { m_dealer.addFunds(deposit); }
 unsigned GUIInterface::cashOut() { return m_dealer.cashOut(); }
 unsigned GUIInterface::getWager() const { return m_dealer.getWagerAmount(); }
 unsigned GUIInterface::getFunds() const { return m_dealer.getFunds(); }
+unsigned GUIInterface::getPayout() const { return m_dealer.getPayout(); }
+string GUIInterface::getHandName() const { return m_dealer.getHandName(); }
 
 string GUIInterface::getCardImageFileName(char suit, unsigned rank) {
 

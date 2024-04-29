@@ -137,9 +137,15 @@ void fiveCardMain::initializeCardSelection() {
         m_selectedCardsText->Hide();
         m_submitKeepersButton->Hide();
 
-        m_dealer.executeKeeperSelection(m_cardSelections);
+        m_dealer.setFinalHand(m_cardSelections);
         displayCards();
         this->Layout();
+
+        // Display hand and winnings
+        displayHandResult();
+
+        // Reset for next hand
+        resetHand();
     }
 
     bool fiveCardMain::placeBet() {
@@ -158,31 +164,6 @@ void fiveCardMain::initializeCardSelection() {
             updateFundsDisplay();
         }
         return sufficientFunds;
-    }
-
-    void fiveCardMain::updateWagerDisplay() {
-        unsigned wager = m_dealer.getWager();  // Assuming this is how you get the wager
-        wagerDisplay->SetLabel(wxString::Format("Wager: %u", wager));
-    }
-
-    void fiveCardMain::updateFundsDisplay() {
-        unsigned funds = m_dealer.getFunds();  // Assuming this is how you get the funds
-        fundsDisplay->SetLabel(wxString::Format("Funds: %u", funds));
-    }
-
-    void fiveCardMain::updateSelectedCardsDisplay() {
-        wxString selectedText = "Selected Cards: ";
-        bool found = false;
-        for (size_t i = 0; i < m_cardSelections.size(); ++i) {
-            if (m_cardSelections[i]) {
-                selectedText += wxString::Format("Card %d, ", int(i + 1));
-                found = true;
-            }
-        }
-        if (!found) {
-            selectedText = "No cards selected";
-        }
-        m_selectedCardsText->SetLabel(selectedText);
     }
 
     void fiveCardMain::displayCards() {
@@ -221,6 +202,57 @@ void fiveCardMain::initializeCardSelection() {
             m_cardSelections.push_back(false);
             m_cardSizer->Add(bitmap, 0, wxALL, 5);
         }
+    }
+
+    void fiveCardMain::displayHandResult() {
+        unsigned payout{ m_dealer.getPayout() };
+        string handName{ m_dealer.getHandName() };
+        wxMessageBox(wxString::Format("%s! Payout of %u coins", handName, payout));
+    }
+
+    void fiveCardMain::resetHand() {
+        // Reset hand
+        m_dealer.resetHand();
+
+        // Update wager and funds displays
+        updateWagerDisplay();
+        updateFundsDisplay();
+
+        // Display card backs
+        displayCards();
+
+        // Display wagering buttons
+        m_wagerLabel->Show();
+        m_placeBetBox->Show();
+        m_dealCardsButton->Show();
+        m_insertCoinButon->Show();
+        m_cashOutButton->Show();
+        this->Layout();
+    }
+
+    void fiveCardMain::updateWagerDisplay() {
+        unsigned wager = m_dealer.getWager();  // Assuming this is how you get the wager
+        wagerDisplay->SetLabel(wxString::Format("Wager: %u", wager));
+    }
+
+    void fiveCardMain::updateFundsDisplay() {
+        unsigned funds = m_dealer.getFunds();  // Assuming this is how you get the funds
+        fundsDisplay->SetLabel(wxString::Format("Funds: %u", funds));
+    }
+
+    void fiveCardMain::updateSelectedCardsDisplay() {
+        wxString selectedText = "Selected Cards: ";
+        bool found = false;
+        for (size_t i = 0; i < m_cardSelections.size(); ++i) {
+            if (m_cardSelections[i]) {
+                selectedText += wxString::Format("Card %d, ", int(i + 1));
+                found = true;
+            }
+        }
+        if (!found) {
+            selectedText = "No cards selected";
+        }
+        m_selectedCardsText->SetLabel(selectedText);
     }
 
     vector<string> fiveCardMain::getCardImages() { return m_dealer.getHandImageFileNames(); }

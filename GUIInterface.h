@@ -10,7 +10,8 @@ class GUIInterface
 
 public:
 	void newHand();
-	void executeKeeperSelection(std::vector<bool>);
+	void setFinalHand(std::vector<bool>);
+	void resetHand();
 
 	bool setWagerAmount(unsigned);
 	void addFunds(unsigned);
@@ -18,6 +19,9 @@ public:
 
 	unsigned getWager() const;
 	unsigned getFunds() const;
+
+	unsigned getPayout() const;
+	std::string getHandName() const;
 
 	std::vector<std::string> getHandImageFileNames();
 

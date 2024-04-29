@@ -22,6 +22,7 @@ void Hand::resetHand() {
 }
 
 const size_t Hand::getHandSize() const { return m_handSize; }
+vector<Card> Hand::getHand() const { return m_hand; }
 
 vector<char> Hand::getHandSuits() const {
 	vector<char> suits;
