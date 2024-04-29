@@ -11,6 +11,6 @@ public:
 
 private:
 	unsigned m_multiplier{ 4 };
-	std::string name{ "Straight" };
+	std::string m_name{ "Straight" };
 };
 

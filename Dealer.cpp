@@ -21,6 +21,10 @@ void Dealer::resetHand() {
 	m_payService.addFunds(getPayout());
 	m_payService.resetWager();
 
+	// Add hand and discards back to deck
+	vector<Card> allCards{ m_hand.getAllCards() };
+	m_deck.addCards(allCards);
+
 	// Reset hand
 	m_hand.resetHand();
 }
@@ -32,7 +36,14 @@ vector<unsigned> Dealer::getHandRanks() const { return m_hand.getHandRanks(); }
 unsigned Dealer::getWagerAmount() const { return m_payService.getWager(); }
 unsigned Dealer::getFunds() const { return m_payService.getFunds(); }
 
-unsigned Dealer::getPayout() const { return getWagerAmount() * getMultiplier(); }
+unsigned Dealer::getPayout() const {
+	unsigned payout{ 0 };
+	unsigned multiplier{ getMultiplier() };
+	if (multiplier != 0) {
+		payout = getWagerAmount() * multiplier + getWagerAmount();
+	}
+	return payout;
+}
 string Dealer::getHandName() const { return m_calculator.getHandName(); }
 
 void Dealer::dealHand() {

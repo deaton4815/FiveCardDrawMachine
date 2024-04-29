@@ -207,7 +207,7 @@ void fiveCardMain::initializeCardSelection() {
     void fiveCardMain::displayHandResult() {
         unsigned payout{ m_dealer.getPayout() };
         string handName{ m_dealer.getHandName() };
-        wxMessageBox(wxString::Format("%s! Payout of %u coins", handName, payout));
+        wxMessageBox(wxString::Format("%s! Total payout of %u coins", handName, payout));
     }
 
     void fiveCardMain::resetHand() {
